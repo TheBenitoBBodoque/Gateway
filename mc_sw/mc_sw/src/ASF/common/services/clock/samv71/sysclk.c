@@ -181,9 +181,9 @@ void sysclk_init(void)
 	}
 
 	else if (CONFIG_SYSCLK_SOURCE == SYSCLK_SRC_SLCK_XTAL) {
-		osc_enable(OSC_SLCK_32K_XTAL);
-		osc_wait_ready(OSC_SLCK_32K_XTAL);
-		pmc_switch_mck_to_sclk(CONFIG_SYSCLK_PRES);
+        osc_enable(OSC_SLCK_32K_XTAL);
+        osc_wait_ready(OSC_SLCK_32K_XTAL);
+        pmc_switch_mck_to_sclk(CONFIG_SYSCLK_PRES);
 	}
 
 	else if (CONFIG_SYSCLK_SOURCE == SYSCLK_SRC_SLCK_BYPASS) {

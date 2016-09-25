@@ -60,23 +60,23 @@
 //#define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_UPLLCK
 
 // ===== Processor Clock (HCLK) Prescaler Options   (Fhclk = Fsys / (SYSCLK_PRES))
-#define CONFIG_SYSCLK_PRES          SYSCLK_PRES_1
+//#define CONFIG_SYSCLK_PRES          SYSCLK_PRES_1
 //#define CONFIG_SYSCLK_PRES          SYSCLK_PRES_2
 //#define CONFIG_SYSCLK_PRES          SYSCLK_PRES_4
 //#define CONFIG_SYSCLK_PRES          SYSCLK_PRES_8
 //#define CONFIG_SYSCLK_PRES          SYSCLK_PRES_16
 //#define CONFIG_SYSCLK_PRES          SYSCLK_PRES_32
 //#define CONFIG_SYSCLK_PRES          SYSCLK_PRES_64
-//#define CONFIG_SYSCLK_PRES          SYSCLK_PRES_3
+#define CONFIG_SYSCLK_PRES          SYSCLK_PRES_3
 
 // ===== System Clock (MCK) Division Options     (Fmck = Fhclk / (SYSCLK_DIV))
-#define CONFIG_SYSCLK_DIV            2
+#define CONFIG_SYSCLK_DIV            4
 
 // ===== PLL0 (A) Options   (Fpll = (Fclk * PLL_mul) / PLL_div)
 // Use mul and div effective values here.
 #define CONFIG_PLL0_SOURCE          PLL_SRC_MAINCK_XTAL
-#define CONFIG_PLL0_MUL             25
-#define CONFIG_PLL0_DIV             3
+#define CONFIG_PLL0_MUL             25 /* Antes era 25 */
+#define CONFIG_PLL0_DIV             1
 
 // ===== UPLL (UTMI) Hardware fixed at 480 MHz.
 

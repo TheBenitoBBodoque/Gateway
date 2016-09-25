@@ -1,29 +1,35 @@
 /******************************************************************************
-*   Filename:   systick.c
+*   Filename:   dio.c
 *
-*   Description: This is the HAL for the Systick peripheral.
-*
+*   Description: This file is the abstraction for the PMC peripheral.
 *
 *   Revision History:
 *
 *   Date          CP#           Author
 *   MM-DD-YY      XXXXX:1       Initials   Description of change
 *   -----------   -----------   --------   ------------------------------------
-*   05-08-16       00            SPA        Gateway Initial Release
+*   08-23-16       00            SPA        Gateway Initial Release
 ******************************************************************************/
 
 /******************************************************************************
 *   Include Files
 ******************************************************************************/
 #include "samv71q21.h"
-#include "core_cm7.h"
-#include "systick.h"
-#include "dio.h"
+#include "ioport.h"
+#include "ioport_pio.h"
+#include "pio.h"
+#include "samv71_xplained_ultra.h"
 
+#include "dio.h"
 /******************************************************************************
 *   Local Macro Definitions
 ******************************************************************************/
-
+#define ioport_set_pin_input_mode(pin, mode, sense) \
+    do {\
+        ioport_set_pin_dir(pin, IOPORT_DIR_INPUT);\
+        ioport_set_pin_mode(pin, mode);\
+        ioport_set_pin_sense_mode(pin, sense);\
+    } while (0)
 /******************************************************************************
 *   Local Type Definitions
 ******************************************************************************/
@@ -35,7 +41,7 @@
 /******************************************************************************
 *   Global Variable Definitions
 ******************************************************************************/
-volatile uint8 systick_timming;
+
 /******************************************************************************
 *   Static Variable Definitions
 ******************************************************************************/
@@ -43,27 +49,35 @@ volatile uint8 systick_timming;
 /******************************************************************************
 *   Global and Static Function Definitions
 ******************************************************************************/
-void (*Systick_Callback_local) (void);
+
 /*****************************************************************************************************
-*   Function: systick_init
+*   Function: Task_1ms
 *
-*   Description: Systick Initialization
+*   Description: Interrupt handler for TC0 interrupt.
 *
 *   Caveats: Non Reentrant
 *****************************************************************************************************/
-void systick_init (void(*func_ptr)(void))
+void dio_init (void)
 {
-    Systick_Callback_local =  func_ptr;
+    /* Configure the pins connected to LED as output and set their
+     * default initial state to high (LED off).
+     */
+    ioport_set_pin_dir(LED0_GPIO, IOPORT_DIR_OUTPUT);
+    ioport_set_pin_level(LED0_GPIO, LED0_INACTIVE_LEVEL);
+    ioport_set_pin_dir(LED1_GPIO, IOPORT_DIR_OUTPUT);
+    ioport_set_pin_level(LED1_GPIO, LED0_INACTIVE_LEVEL);
+
+    /* Configure Push Button pins */
+    ioport_set_pin_input_mode(GPIO_PUSH_BUTTON_1, GPIO_PUSH_BUTTON_1_FLAGS,
+            GPIO_PUSH_BUTTON_1_SENSE);
 }
 
-void systick_driver_init (void)
+void prender_led (void)
 {
-    /* 6250 for .5ms or 12500 for 1ms timebase with the processor running at 100Mhz*/
-    SysTick_Config(99999);
+    ioport_set_pin_level(LED1_GPIO, LED1_ACTIVE_LEVEL);
 }
 
-void SysTick_Handler( void )
+void apagar_led (void)
 {
-    SCB->ICSR |= SCB_ICSR_PENDSTCLR_Msk;
-    Systick_Callback_local();
+    ioport_set_pin_level(LED1_GPIO, LED1_INACTIVE_LEVEL);
 }

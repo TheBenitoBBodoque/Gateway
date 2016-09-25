@@ -163,26 +163,26 @@ void pmc_mck_set_source(uint32_t ul_source)
  */
 uint32_t pmc_switch_mck_to_sclk(uint32_t ul_pres)
 {
-	uint32_t ul_timeout;
+    uint32_t ul_timeout;
 
-	PMC->PMC_MCKR = (PMC->PMC_MCKR & (~PMC_MCKR_CSS_Msk)) |
-			PMC_MCKR_CSS_SLOW_CLK;
-	for (ul_timeout = PMC_TIMEOUT; !(PMC->PMC_SR & PMC_SR_MCKRDY);
-			--ul_timeout) {
-		if (ul_timeout == 0) {
-			return 1;
-		}
-	}
+    PMC->PMC_MCKR = (PMC->PMC_MCKR & (~PMC_MCKR_CSS_Msk)) |
+            PMC_MCKR_CSS_SLOW_CLK;
+    for (ul_timeout = PMC_TIMEOUT; !(PMC->PMC_SR & PMC_SR_MCKRDY);
+            --ul_timeout) {
+        if (ul_timeout == 0) {
+            return 1;
+        }
+    }
 
-	PMC->PMC_MCKR = (PMC->PMC_MCKR & (~PMC_MCKR_PRES_Msk)) | ul_pres;
-	for (ul_timeout = PMC_TIMEOUT; !(PMC->PMC_SR & PMC_SR_MCKRDY);
-			--ul_timeout) {
-		if (ul_timeout == 0) {
-			return 1;
-		}
-	}
+    PMC->PMC_MCKR = (PMC->PMC_MCKR & (~PMC_MCKR_PRES_Msk)) | ul_pres;
+    for (ul_timeout = PMC_TIMEOUT; !(PMC->PMC_SR & PMC_SR_MCKRDY);
+            --ul_timeout) {
+        if (ul_timeout == 0) {
+            return 1;
+        }
+    }
 
-	return 0;
+    return 0;
 }
 
 /**

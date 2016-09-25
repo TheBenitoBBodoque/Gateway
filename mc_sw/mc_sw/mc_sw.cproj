@@ -287,6 +287,8 @@
       <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
       <Value>../src/ASF/sam/utils/cmsis/samv71/include</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/sam/drivers/afec</Value>
+      <Value>../src/ASF/common/services/sleepmgr</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -334,6 +336,8 @@
       <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
       <Value>../src/ASF/sam/utils/cmsis/samv71/include</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/sam/drivers/afec</Value>
+      <Value>../src/ASF/common/services/sleepmgr</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -392,6 +396,9 @@
       <Value>../src/sources/microcontroller abstraction/clock</Value>
       <Value>../src/sources/microcontroller abstraction/systick</Value>
       <Value>../src/sources/microcontroller abstraction/dio</Value>
+      <Value>../src/ASF/common/services/ioport/sam</Value>
+      <Value>../src/ASF/sam/drivers/afec</Value>
+      <Value>../src/ASF/common/services/sleepmgr</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -442,6 +449,8 @@
       <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
       <Value>../src/ASF/sam/utils/cmsis/samv71/include</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/sam/drivers/afec</Value>
+      <Value>../src/ASF/common/services/sleepmgr</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -806,6 +815,12 @@
     <Compile Include="src\sources\microcontroller abstraction\clock\clock.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\sources\microcontroller abstraction\dio\dio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\sources\microcontroller abstraction\dio\dio.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\sources\microcontroller abstraction\systick\systick.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1060,7 +1075,6 @@
     <Folder Include="src\ASF\sam\drivers\pmc\" />
     <Folder Include="src\ASF\sam\drivers\tc\" />
     <Folder Include="src\ASF\sam\utils\" />
-    <Folder Include="src\ASF\sam\utils\cmsis\" />
     <Folder Include="src\ASF\sam\utils\fpu\" />
     <Folder Include="src\ASF\sam\utils\header_files\" />
     <Folder Include="src\ASF\sam\utils\linker_scripts\" />
@@ -1082,6 +1096,7 @@
     <Folder Include="src\sources\microcontroller abstraction" />
     <Folder Include="src\sources\microcontroller abstraction\adc" />
     <Folder Include="src\sources\microcontroller abstraction\clock" />
+    <Folder Include="src\sources\microcontroller abstraction\dio" />
     <Folder Include="src\sources\microcontroller abstraction\systick" />
     <Folder Include="src\sources\microcontroller abstraction\tc" />
     <Folder Include="src\sources\system_services" />

@@ -21,7 +21,10 @@
 #include "board.h"
 #include "Os_Task.h"
 #include "typedefs.h"
-#include "led.h"
+//#include "led.h"
+#include "dio.h"
+#include "samv71q21.h"
+#include "adc.h"
 /******************************************************************************
  *   Local Macro Definitions
  ******************************************************************************/
@@ -37,7 +40,7 @@
 /******************************************************************************
  *   Global Variable Definitions
  ******************************************************************************/
-
+uint32 prueba_PMC_PCR;
 /******************************************************************************
  *   Static Variable Definitions
  ******************************************************************************/
@@ -56,6 +59,7 @@ static uint8 variable2 = 0;
  *****************************************************************************************************/
 TASK (Task_1ms)
 {
+
     uint16 index;
     Status_Type Error_Result = E_OK;
     if(variable == 0)
@@ -64,12 +68,13 @@ TASK (Task_1ms)
         if(variable2 == 0)
         {
             variable2 = 1;
-            ioport_set_pin_level(LED0_GPIO, LED0_ACTIVE_LEVEL);
+            prender_led();
+            //AFEC_ConvertionStart();
         }
         else
         {
             variable2 = 0;
-            ioport_set_pin_level(LED0_GPIO, LED0_INACTIVE_LEVEL);
+            apagar_led();
         }
     }
     else
@@ -146,6 +151,12 @@ TASK (Task_64ms)
 {
 	uint16 index;
 	Status_Type Error_Result = E_OK;
+
+//	PMC->PMC_PCR = PMC_PCR_PID(ID_AFEC0);
+//	prueba_PMC_PCR = PMC->PMC_PCR;
+
+
+
 	Error_Result=TerminateTask();
 }
 

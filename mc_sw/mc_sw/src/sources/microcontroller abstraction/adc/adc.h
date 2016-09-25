@@ -133,6 +133,8 @@ typedef enum
 *   Global Function Prototypes
 ******************************************************************************/
 void ADC_init (void);
-void ADC_EnablePeripheral (ADC_Channel_Type Channel);
+void ADC_EnablePeripheral_MCK (ADC_Channel_Type Channel);
+void ADC_EnablePeripheral_GLCK (void);
+void AFEC_ConvertionStart (void);
 
 #endif /*__ADC_H*/

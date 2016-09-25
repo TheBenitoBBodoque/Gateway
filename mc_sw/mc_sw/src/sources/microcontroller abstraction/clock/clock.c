@@ -29,7 +29,7 @@
 /******************************************************************************
 *   Local Function Declarations
 ******************************************************************************/
-
+void clock_init_32K_XTAL (void);
 /******************************************************************************
 *   Global Variable Definitions
 ******************************************************************************/
@@ -67,4 +67,13 @@ void clock_init (void)
 //    PMC->PMC_PCR =
 
     sysclk_init();
+	
+    /* Configure this to make to work the AFEC */
+    clock_init_32K_XTAL();
+}
+
+void clock_init_32K_XTAL (void)
+{
+    SUPC->SUPC_CR |= SUPC_CR_KEY_PASSWD | SUPC_CR_XTALSEL;
+    while (!((SUPC->SUPC_SR & SUPC_SR_OSCSEL) && (PMC->PMC_SR & PMC_SR_OSCSELS)));
 }
